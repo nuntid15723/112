@@ -1,59 +1,52 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <b-row>
+      <b-container>
+        <!-- <b-card bg-variant="success" text-variant="white"> -->
+        <div role="group">
+          <b-row class="my-1">
+            <b-col sm="2">
+              <label for="input-small">{{ this.index }}:</label>
+            </b-col>
+            <b-col sm="10">
+              <b-form-input
+                type="text"
+                id="input-live"
+                v-model="name"
+                :state="nameState"
+                aria-describedby="input-live-help input-live-feedback"
+                onKeyUp="if(!(isNaN(this.value))){ alert('เขียนตัวเลขไม่ได้'); this.value='';}"
+                placeholder="Put food"
+                pattern="[A-Za-z]{1,50}"
+                trim
+                required
+              ></b-form-input>
+              <b-form-invalid-feedback id="input-live-feedback">
+                Enter your food
+              </b-form-invalid-feedback>
+            </b-col>
+          </b-row>
+        </div>
+        <!-- </b-card> -->
+      </b-container>
+    </b-row>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'HelloWorld',
   props: {
-    msg: String
-  }
-}
+    index: Number,
+  },
+  computed: {
+    nameState() {
+      return this.name.length > 2 ? true : false;
+    },
+  },
+  data() {
+    return {
+      name: "",
+    };
+  },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
